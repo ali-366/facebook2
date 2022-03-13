@@ -20,7 +20,7 @@ include('conn.php');
 
             mysqli_query($conn,"INSERT INTO post_info(name,user_image,date,post_cont,post_img)VALUES('$Totall_name','$user_img','$postdate','$postcont','$postimg')");
 
-            header('location: ../home/admin.php');
+            header('location: ../home/admin.php?result = u_have_create_a_post');
 
            }else{
             header('location: ../home/admin.php?result = khali3');

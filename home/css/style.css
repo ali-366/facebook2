@@ -508,3 +508,14 @@ textarea {
 }
 
 /* =======main boody css end======== */
+
+  .comm{
+      margin: 10px 0px;
+   padding: 10px 20px;
+   background: rgb(202, 202, 202);
+   border-radius:10px ;
+   -webkit-border-radius:10px ;
+   -moz-border-radius:10px ;
+   -ms-border-radius:10px ;
+   -o-border-radius:10px ;
+}

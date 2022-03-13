@@ -309,18 +309,22 @@ $user_img = $_SESSION['pic_name'];
                <!-- <video id="vid" autoplay="true" placeholder='vedio'>video</video> -->
               </div>
 
-            <?php
-            
-            include('../inc/conn.php');
+                    <?php
+                    
+                            include('../inc/conn.php');
 
-            $all_post = mysqli_query($conn,"SELECT * FROM post_info ORDER by post_id DESC");
+                            $all_post = mysqli_query($conn," SELECT * FROM post_info ORDER BY post_id DESC ");
 
-            $post_tokra = mysqli_fetch_array($all_post);
-            
-            
-          
-            while($post_tokra = mysqli_fetch_array($all_post)):
-            ?>
+                            $post_tokra = mysqli_fetch_array($all_post);
+
+                            
+                            
+                            
+                          
+                            while($post_tokra = mysqli_fetch_array($all_post)):
+
+                              $postId = $post_tokra['post_id'];
+                    ?>
 
 
               <div class="new-post ">
@@ -336,7 +340,7 @@ $user_img = $_SESSION['pic_name'];
                  <div class="post-text">
                 <p class="lead mb-0 ps-0 d-inline-block"><?php echo $post_tokra['post_cont'];?></p>
                 <a href="#" class="btn d-inline-block p-0">...See More</a>
-              </div>
+                </div>
                <div class="post-images">
                  <img src="../postImg/<?php echo $post_tokra['post_img'];?>" alt="img" class="img-fluid w-100">
                </div>
@@ -352,17 +356,48 @@ $user_img = $_SESSION['pic_name'];
               </div>
               <!-- commentes starts -->
               <div class="col-lg-12">
-                <div class="new-post-id d-flex my-2">
-                  <div class="img">
-                    <img src="../profile/<?php echo $user_img; ?>" class="img-fluid"  alt="img">
+                        <form action="../inc/comments.php" method="POST">
+                            <div class="new-post-id d-flex my-2">
+                              <div class="img">
+                                <img src="../profile/<?php echo $user_img; ?>" class="img-fluid"  alt="img">
+                              </div>
+                    
+                              <input type="text" name="user_comm" placeholder="Write a comments....">
+                              <input type="hidden" name="postid" value="<?php echo $postId;?>">
+                    
+                             </div>
+                        </form>
+
+                              <?php
+                              
+                                  $all_comm = mysqli_query($conn," SELECT * FROM comm_info WHERE post_id = '$postId' ORDER BY comm_id DESC");
+                              
+                                      $comm_Tokra = mysqli_fetch_array($all_comm);
+                                      
+                               while($comm_Tokra = mysqli_fetch_array($all_comm)):       
+                              ?>
+
+
+
+                 <div class="comments">
+                    <div class="new-post comm ">
+                        <div class="new-post-id d-flex">
+                          <div class="img">
+                            <img src="../profile/<?php echo $post_tokra['user_image'];?>" class="img-fluid"  alt="img">
+                          </div>
+                          <div class="id-name">
+                            <h4 class="mb-0 text-capitalize"><a href="#"><?php echo $post_tokra['name'];?></a></h4>
+                            <p class="lead mb-0"><?php echo $post_tokra['date'];?></p>
+                          </div>
+                        </div>
+                          <div class="post-text">
+                          <p class="lead mb-0 ps-0 d-inline-block"><?php echo $comm_Tokra['comments'];?></p>
+                          </div>
                   </div>
-                 
-                    <input type="text" class="" placeholder="Write a comments....">
-                
-                 </div>
+                  <?php endwhile; ?>
               </div>
               <!-- commentes ends -->
-              <?php endwhile;?>
+              <?php endwhile; ?>
               </div>
             </div>
             <div class="col-lg-3">
