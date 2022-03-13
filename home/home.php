@@ -313,13 +313,11 @@ $user_img = $_SESSION['pic_name'];
                     
                             include('../inc/conn.php');
 
-                            $all_post = mysqli_query($conn," SELECT * FROM post_info ORDER BY post_id DESC ");
+                            $all_post = mysqli_query($conn," SELECT * FROM post_info WHERE name = '$full_name' ORDER BY post_id DESC ");
 
                             $post_tokra = mysqli_fetch_array($all_post);
 
-                            
-                            
-                            
+                     
                           
                             while($post_tokra = mysqli_fetch_array($all_post)):
 
@@ -328,6 +326,8 @@ $user_img = $_SESSION['pic_name'];
 
 
               <div class="new-post ">
+                <a href="../inc/edit.php">Edit</a>
+                <a href="../inc/delete.php?del=<?php echo $postId; ?>">Delete</a>
                <div class="new-post-id d-flex">
                 <div class="img">
                   <img src="../profile/<?php echo $post_tokra['user_image'];?>" class="img-fluid"  alt="img">
