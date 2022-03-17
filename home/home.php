@@ -268,41 +268,41 @@ $user_img = $_SESSION['pic_name'];
                       </div>
                       <form action="../inc/post.php" method="POST" enctype="multipart/form-data">
 
-                      <div class="modal-body">
-                        <div class="col-lg-12">
-                        <textarea class="post_con" name="post_cont" id="" cols="30"placeholder="What's on your mind'<?php echo $_SESSION['last_name'];?>?" ></textarea>
-                        <ul class=" mb-0 ps-0 up_file d-flex">
-                          <li>
-                             <button class="btn btn-outline-dark">
-                              <i class="fa-solid fa-video"></i> <br> 
-                              Live Video
-                            </button>
-                          
-                          </li>
-                          <li>
-                       
-                              <input type="file"class=" btn-outline-dark" name="postimage">
-                              <i class="fa-solid fa-image text-capitalize"></i>
-                              Photos Video  
-                          
-                        
-                          </li>
-                        </li>
-                        <li>
-                      
-                            <button class="btn btn-outline-dark">
-                              <i class="fa-solid fa-face-smile-beam"></i><br>
-                               Feeling Activity
-                            </button>
-                            
-                        </li>
-                       </ul>
-                        </div>
-                       </div>
-                        <div class="modal-footer">
-                          <input type="submit" class="btn btn-primary" value="Post">
-                        </div>
-                    </div>
+                              <div class="modal-body">
+                                <div class="col-lg-12">
+                                <textarea class="post_con" name="post_cont" id="" cols="30"placeholder="What's on your mind'<?php echo $_SESSION['last_name'];?>?" ></textarea>
+                                <ul class=" mb-0 ps-0 up_file d-flex">
+                                  <li>
+                                    <button class="btn btn-outline-dark">
+                                      <i class="fa-solid fa-video"></i> <br> 
+                                      Live Video
+                                    </button>
+                                  
+                                  </li>
+                                  <li>
+                              
+                                      <input type="file"class=" btn-outline-dark" name="postimage">
+                                      <i class="fa-solid fa-image text-capitalize"></i>
+                                      Photos Video  
+                                  
+                                
+                                  </li>
+                                </li>
+                                <li>
+                              
+                                    <button class="btn btn-outline-dark">
+                                      <i class="fa-solid fa-face-smile-beam"></i><br>
+                                      Feeling Activity
+                                    </button>
+                                    
+                                </li>
+                              </ul>
+                                </div>
+                              </div>
+                                <div class="modal-footer">
+                                  <input type="submit" class="btn btn-primary" value="Post">
+                                </div>
+                            </div>
                       </form>
                   </div>
                 </div>
@@ -315,7 +315,7 @@ $user_img = $_SESSION['pic_name'];
 
                             $all_post = mysqli_query($conn," SELECT * FROM post_info WHERE name = '$full_name' ORDER BY post_id DESC ");
 
-                            $post_tokra = mysqli_fetch_array($all_post);
+                     
 
                      
                           
@@ -326,7 +326,7 @@ $user_img = $_SESSION['pic_name'];
 
 
               <div class="new-post ">
-                <a href="../inc/edit.php">Edit</a>
+                <a href="edit1.php?edit=<?php echo $postId; ?>">Edit</a>
                 <a href="../inc/delete.php?del=<?php echo $postId; ?>">Delete</a>
                <div class="new-post-id d-flex">
                 <div class="img">

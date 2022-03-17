@@ -232,8 +232,8 @@ $user_img = $_SESSION['pic_name'];
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="post ">
+                </div>
+                <div class="post ">
                 <div class="img">
                   <img src="../profile/<?php echo $user_img; ?>" class="img-fluid"  alt="img">
                 </div>
@@ -266,136 +266,63 @@ $user_img = $_SESSION['pic_name'];
                         <h4 class="modal-title text-capitalize" id="staticBackdropLabel">Create a post</h4>
                         <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <form action="../inc/post.php" method="POST" enctype="multipart/form-data">
-
-                            <div class="modal-body">
-                              <div class="col-lg-12">
-                              <textarea class="post_con" name="post_cont" id="" cols="30"placeholder="What's on your mind'<?php echo $_SESSION['last_name'];?>?" ></textarea>
-                              <ul class=" mb-0 ps-0 up_file d-flex">
-                                <li>
-                                  <button class="btn btn-outline-dark">
-                                    <i class="fa-solid fa-video"></i> <br> 
-                                    Live Video
-                                  </button>
-                                
-                                </li>
-                                <li>
-                            
-                                    <input type="file"class=" btn-outline-dark" name="postimage">
-                                    <i class="fa-solid fa-image text-capitalize"></i>
-                                    Photos Video  
-                                
-                                </li>
-                              </li>
-                              <li>
-                            
-                                  <button class="btn btn-outline-dark">
-                                    <i class="fa-solid fa-face-smile-beam"></i><br>
-                                    Feeling Activity
-                                  </button>
-                                  
-                              </li>
-                            </ul>
-                              </div>
-                            </div>
-                              <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="Post">
-                              </div>
-                          </div>
-                      </form>
+                      
                   </div>
                 </div>
                <!-- <video id="vid" autoplay="true" placeholder='vedio'>video</video> -->
-              </div>
-
+               
+                </div>
+                    <h4 class="text-center text-capitalize" style="background:#444;color:#fff;">edit post here</h4>
                     <?php
                     
                             include('../inc/conn.php');
 
-                            $all_post = mysqli_query($conn," SELECT * FROM post_info ORDER BY post_id DESC ");
+                           if(isset($_GET['edit'])):
 
-                        
+                              $editpost_id = $_GET['edit'];
 
-               
+                     
+                            $all_post = mysqli_query($conn,"SELECT * FROM post_info ORDER BY post_id = '$editpost_id'");
+
+                    
+
                             while($post_tokra = mysqli_fetch_array($all_post)):
 
-                            $postId = $post_tokra['post_id'];
+                              $postId = $post_tokra['post_id'];
+                              $editpostcon = $post_tokra['post_cont'];
+                              $editpostimg = $post_tokra['post_img'];
                     ?>
 
+                      <form action="../inc/editt.php" method="POST" enctype="multipart/form-data">
 
-              <div class="new-post ">
-               <div class="new-post-id d-flex">
-                <div class="img">
-                  <img src="../profile/<?php echo $post_tokra['user_image'];?>" class="img-fluid"  alt="img">
-                </div>
-                <div class="id-name">
-                  <h4 class="mb-0 text-capitalize"><a href="#"><?php echo $post_tokra['name'];?></a></h4>
-                  <p class="lead mb-0"><?php echo $post_tokra['date'];?></p>
-                </div>
-               </div>
-                 <div class="post-text">
-                <p class="lead mb-0 ps-0 d-inline-block"><?php echo $post_tokra['post_cont'];?></p>
-                <a href="#" class="btn d-inline-block p-0">...See More</a>
-                </div>
-               <div class="post-images">
-                 <img src="../postImg/<?php echo $post_tokra['post_img'];?>" alt="img" class="img-fluid w-100">
-               </div>
-               <div class="li-comm d-flex justify-content-between">
-                 <a href="#" class="btn"><i class="fa-regular fa-heart"></i> <span>123</span></a>
-                 <a href="#" class="btn"></i> <span>12 </span>Commentes</a>
-                 
-               </div>
-               <div class="li-com c-btn d-flex justify-content-evenly">
-                <button href="#" class="btn-control"><i class="fa-regular fa-thumbs-up"></i> <span>Like</span></button>
-                <button href="#" class="btn-control"><i class="fa-regular fa-comment"></i>Commentes</button>
-                <button href="#" class="btn-control"><i class="fa-solid fa-share"></i> Share</button>
-              </div>
-              <!-- commentes starts -->
-              <div class="col-lg-12">
-                        <form action="../inc/comments.php" method="POST">
-                            <div class="new-post-id d-flex my-2">
-                              <div class="img">
-                                <img src="../profile/<?php echo $user_img; ?>" class="img-fluid"  alt="img">
+                          <div class="modal-body">
+                              <div class="col-lg-12">
+                                   <textarea class="post_con" name="post_cont" id="" cols="30"placeholder="What's on your mind'<?php echo $_SESSION['last_name'];?>?"><?php echo $editpostcon;?></textarea>
+                            
                               </div>
-                    
-                              <input type="text" name="user_comm" placeholder="Write a comments....">
-                              <input type="hidden" name="postid" value="<?php echo $postId;?>">
-                    
-                             </div>
-                        </form>
-
-                              <?php
+                              <p class="text-capitalize my-3">Select Your Photos</p>
+                       
+                              <input type="file"class=" btn-outline-dark" name="postimage">
+                              <div class="image">
+                                <img src="../postImg/<?php echo $editpostimg; ?>" class="img-fluid"  alt="img">
+                              </div>
                               
-                                  $all_comm = mysqli_query($conn," SELECT * FROM comm_info WHERE post_id = '$postId' ORDER BY comm_id DESC");
-                              
-                                      $comm_Tokra = mysqli_fetch_array($all_comm);
-                                      
-                               while($comm_Tokra = mysqli_fetch_array($all_comm)):       
-                              ?>
-
-
-
-                 <div class="comments">
-                    <div class="new-post comm ">
-                        <div class="new-post-id d-flex">
-                          <div class="img">
-                            <img src="../profile/<?php echo $post_tokra['user_image'];?>" class="img-fluid"  alt="img">
+                                <div class="modal-footer">
+                                  <input type="submit" class="btn btn-primary" value="Updaet Post">
+                                </div>
                           </div>
-                          <div class="id-name">
-                            <h4 class="mb-0 text-capitalize"><a href="#"><?php echo $post_tokra['name'];?></a></h4>
-                            <p class="lead mb-0"><?php echo $post_tokra['date'];?></p>
-                          </div>
-                        </div>
-                          <div class="post-text">
-                          <p class="lead mb-0 ps-0 d-inline-block"><?php echo $comm_Tokra['comments'];?></p>
-                          </div>
-                  </div>
-                  <?php endwhile; ?>
-              </div>
-              <!-- commentes ends -->
-              <?php endwhile; ?>
-              </div>
+                      </form>
+              
+                <!-- commentes ends -->
+                <?php endwhile;
+                
+                                endif;
+                
+                ?>
+                </div>
+              
             </div>
+            
             <div class="col-lg-3">
               <div class="right-side box ">
                 <h5>Friend Requests <a href="#" class="py-3"> &nbsp;&nbsp; See All</a></h5>

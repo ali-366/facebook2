@@ -16,7 +16,7 @@ include('conn.php');
 
              
 
-           if($postcont || $postimg){
+           if($postcont||$postimg){
 
             mysqli_query($conn,"INSERT INTO post_info(name,user_image,date,post_cont,post_img)VALUES('$Totall_name','$user_img','$postdate','$postcont','$postimg')");
 
